@@ -120,7 +120,7 @@ export class DoctorEditComponent implements OnInit {
                 this.doctorService.update(item).subscribe(data => this.goBack());
             } else {
                 this.doctorService.create(item).subscribe(data => this.goBack());
-            } 
+            }
         }
     }
 
@@ -132,6 +132,14 @@ export class DoctorEditComponent implements OnInit {
     }
 
 
+    /**
+     * Find Label Patient
+     */
+    findLabel(id): string {
+        const patient = this.listPatients.filter(item => item._id === id);
+        if (patient[0])
+            return patient[0].name + ' ' + patient[0].surname;
+    }
 }
 
 

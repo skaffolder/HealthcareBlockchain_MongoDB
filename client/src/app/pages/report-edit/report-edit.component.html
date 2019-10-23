@@ -27,7 +27,7 @@
 
                     <label for="Doctor">Doctor</label>
                     <select name="doctor" id="doctor" [(ngModel)]="item.doctor" class="form-control" #doctor="ngModel"  >
-                        <option *ngFor="let item of listDoctor" [value]="item._id">{{item._id}}</option>
+                        <option *ngFor="let item of listDoctor" [value]="item._id">{{item.name}}</option>
                     </select>
 
                     

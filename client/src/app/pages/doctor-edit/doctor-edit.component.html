@@ -27,7 +27,8 @@
                                     Add
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonpatients">
-                                    <button class="dropdown-item" *ngFor="let item of listPatients" [class.disabled]="containPatient(item._id)" (click)="$event.preventDefault(); containPatient(item._id) || addPatient(item._id)">{{item._id}}
+                                    <button class="dropdown-item" *ngFor="let item of listPatients" [class.disabled]="containPatient(item._id)" (click)="$event.preventDefault(); containPatient(item._id) || addPatient(item._id)">
+                                        {{item.name}} {{item.surname}}
                                     </button>
                                 </div>
                             </span>
@@ -36,7 +37,7 @@
                             <ul class="list-group">
                                 <li class="list-group-item" *ngIf="!item.patients || item.patients.length == 0">No item found</li>
                                 <li class="list-group-item" *ngFor="let obj of item.patients; let i = index">
-                                    {{obj}}
+                                    {{findLabel(obj)}}
 
                                     <button class="btn btn-danger pull-right" type="button" (click)="removePatient(i)">
                                         <i class="fa fa-trash"></i>
@@ -50,7 +51,7 @@
         
                         <h3 *ngIf="externalReport[0]">Report</h3>
                         <ul class="list-group">
-                        <li class="list-group-item" *ngFor="let item of externalReport">{{item._id}}</li>
+                        <li class="list-group-item" *ngFor="let item of externalReport">{{item.date | date}} - {{item._id}}</li>
                         </ul>
 
                     <!-- BUTTON BAR -->
