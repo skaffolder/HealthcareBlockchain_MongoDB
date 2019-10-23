@@ -1,0 +1,53 @@
+**** PROPERTIES SKAFFOLDER ****
+{
+    "forEachObj": "oneTime",
+    "_partials": [
+        {
+            "template": "{{#each resources}}{{#each _resources}}{{#notNull _entity}}      {{_entity.name}}: {\n        factomized: \"{{#each _entity._relations}}{{#equal name ../_entity.extra.factomize}}{{_ent2.name}}{{/equal}}{{/each}}\",{{#equal _entity.extra.identity true}}\n        has_identity: true{{/equal}}\n      },\n{{/notNull}}{{/each}}{{/each}}\n     ",
+            "tagFrom": "// Start Factom model properties",
+            "tagTo": "// End Factom model properties",
+            "name": "Factom Partial"
+        }
+    ]
+}
+**** END PROPERTIES SKAFFOLDER ****
+module.exports = {
+    
+  {{#each dbs}}
+  {{name}}_dbUrl: (process.env.DB_HOST || 'localhost') + ':27017/{{name}}',
+  {{/each}}
+
+  // Factom properties
+  factom: {
+    config: {
+      baseUrl: "https://ephemeral.api.factom.com/v1",
+      accessToken: {
+        appId: "myAppId",
+        appKey: "myAppKey"
+      }
+    },
+    model: {
+      // Start Factom model properties
+      Classes: {
+        factomized: ""
+      },
+      Program: {
+        factomized: "",
+        has_identity: true
+      },
+      Student: {
+        factomized: "Program"
+      },
+      User: {
+        factomized: ""
+      }
+
+      // End Factom model properties
+    }
+  },
+
+  publicPath: "../client/dist",
+  port: process.env.NODE_PORT || 3000,
+  tokenSecret: "Insert Your Secret Token",
+  api: process.env.NODE_API != null ? process.env.NODE_API : "/api"
+};
